@@ -1,0 +1,59 @@
+<div class="background-image bg-gradient-dark"></div>
+
+<mat-sidenav-container class="example-container">
+  <mat-sidenav-content>
+    <div class="login-container">
+      <div class="login-content">
+        <div class="login-form">
+          <img class="logo avatar mat-elevation-z8" src="/images/avatars/sho.jpeg" />
+          <form [formGroup]="reactiveForm" (ngSubmit)="send()">
+            <div class="example-container">
+              <!-- <h2 class="welcome">Welcome!</h2> -->
+
+              <div class="line-container">
+                <div class="line"></div>
+                <div class="figure">
+                  <span>&#9733;</span>
+                </div>
+                <div class="line"></div>
+              </div>
+
+              <!-- Username -->
+              <div class="form-field mt-2">
+                <mat-form-field appearance="outline" class="wide-form-field">
+                  <mat-label>Username:</mat-label>
+                  <input formControlName="username" matInput />
+                  <mat-icon matSuffix>username</mat-icon>
+                  @if (usernameField.hasError('required')){
+                  <mat-error>Username is required</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+
+              <!-- Password -->
+              <div class="form-field">
+                <mat-form-field appearance="outline" class="wide-form-field">
+                  <mat-label>Password:</mat-label>
+                  <input formControlName="password" matInput type="password" />
+                  <mat-icon matSuffix>password</mat-icon>
+                  @if (passwordField.hasError('required')){
+                  <mat-error>Password is required</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+
+              <button type="submit" mat-raised-button color="primary" class="wide-form-field">
+                Sign In <mat-icon>send</mat-icon>
+              </button>
+
+              <p class="register-link">
+                ¿No tienes una cuenta?:
+                <a href="ruta-de-registro"> Regístrate</a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
