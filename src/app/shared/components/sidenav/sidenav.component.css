@@ -75,8 +75,8 @@ mat-toolbar {
 }
 
 mat-sidenav {
-  width: 250px; /* Ajusta este valor según tus necesidades */
-  max-width: 250px; /* Asegura que no crezca más allá de este ancho */
+  width: 230px; /* Ajusta este valor según tus necesidades */
+  max-width: 230px; /* Asegura que no crezca más allá de este ancho */
   background-image: url("/images/nav.png") !important;
   border-right: none;
   background: #091013;
@@ -112,6 +112,7 @@ mat-divider {
 
 .avatar {
   margin-top: 0;
+  margin-top: 1rem;
   width: 6.25rem; /* 100px */
   height: 6.25rem;
   border-radius: 3.125rem; /* 50px */

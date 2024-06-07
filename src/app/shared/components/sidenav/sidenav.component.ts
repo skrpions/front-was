@@ -21,7 +21,7 @@ export class SidenavComponent {
   mobileQuery!: MediaQueryList; // Responsive media query
   menuNav = [
     { name: 'Inicio', route: 'home', icon: 'dashboard' },
-    { name: 'Certificados', route: 'certificates', icon: 'folder_special' },
+    { name: 'Certificados', route: 'certificates', icon: 'badge' },
     //{ name: 'Collaborators', route: 'colaborators', icon: 'people' },
   ];
 

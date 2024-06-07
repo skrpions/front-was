@@ -1,3 +1,9 @@
+.black-card {
+  background-color: #091013;
+  color: white;
+  border-radius: 0;
+}
+
 .flex-container {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -9,17 +15,22 @@
 
 .mat-icon {
   font-size: 24px;
+  line-height: 1; /* Asegura que la altura de línea no afecte la alineación */
+  display: flex;
+  align-items: center; /* Centra verticalmente el icono */
+  justify-content: center; /* Centra horizontalmente el icono */
+}
+
+h5 {
+  margin: 0; /* Elimina el margen para asegurar alineación perfecta */
+  display: flex;
+  align-items: center; /* Centra verticalmente el texto */
+  justify-content: center; /* Centra horizontalmente el texto */
 }
 
 h2 {
   margin: 0;
   font-family: "Times New Roman", Times, serif;
-}
-
-.black-card {
-  background-color: #091013;
-  color: white;
-  border-radius: 0;
 }
 
 mat-divider {

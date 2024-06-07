@@ -19,7 +19,7 @@ import { UtilsService } from '../../../../shared/services/utils.service';
 })
 export class ListCertificatesComponent {
   icon_header = 'badge'; // Adjusted icon
-  title_header = 'Certificates'; // Adjusted title
+  title_header = 'Certificados'; // Adjusted title
   //messages!: Messages;
 
   filterValue = '';

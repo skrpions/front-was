@@ -10,7 +10,8 @@ export class CertificateInfrastructure {
 
   list(): Observable<CertificateEntity[]> {
     return this.http.get<CertificateEntity[]>(
-      `${environment.apiPath}/certificates`
+      `${environment.apiCertificates}`
+      //`${environment.apiPath}/certificates`
     );
   }
 
