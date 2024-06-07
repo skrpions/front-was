@@ -3,7 +3,7 @@
     <mat-icon>{{ icon_header }}</mat-icon>
     {{ title_header }}
   </span>
-  <button mat-icon-button mat-dialog-close>
+  <button class="white" mat-icon-button mat-dialog-close>
     <mat-icon>close</mat-icon>
   </button>
 </mat-toolbar>
@@ -65,13 +65,12 @@
         <!-- Certification Date -->
         <mat-form-field class="col-6" appearance="outline">
           <mat-label>Certification Date:</mat-label>
-          <input formControlName="certificationDate" type="number" matInput required />
+          <input formControlName="certificationDate" matInput [matDatepicker]="picker">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
           @if (certificationDateField?.hasError('required')){
-          <mat-error>certificationDate is required</mat-error>
-          } @if (certificationDateField?.hasError('minlength')){
-          <mat-error>Insufficient Characters</mat-error>
-          } @if (certificationDateField?.hasError('maxlength')){
-          <mat-error>Character Limit Reached</mat-error>
+          <mat-error>CertificationDate is required</mat-error>
           }
         </mat-form-field>
       </div>

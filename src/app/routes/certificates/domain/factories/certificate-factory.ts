@@ -34,7 +34,7 @@ export class CertificateFactory {
     }
 
     if (!data.certificationDate || typeof data.certificationDate !== 'string') {
-      return false; // Graduation date must be a non-empty string
+      return false; // Certification Date must be a non-empty string
     }
 
     if (!data.certificateType || typeof data.certificateType !== 'string') {
