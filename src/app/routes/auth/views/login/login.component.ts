@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MaterialModule } from '../../../../shared/material.module';
 import {
@@ -13,7 +13,12 @@ import { AuthApplication } from '../../application/auth-application';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, MaterialModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    NgOptimizedImage,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
