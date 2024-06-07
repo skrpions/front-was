@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './routes/auth/views/login/login.component';
 import { DashboardComponent } from './routes/dashboard/views/dashboard/dashboard.component';
 import { AdminLayoutComponent } from './theme/admin-layout/admin-layout.component';
+import { ListCertificatesComponent } from './routes/certificates/views/list-certificates/list-certificates.component';
 
 export const routes: Routes = [
   {
@@ -22,11 +23,11 @@ export const routes: Routes = [
         path: 'home',
         component: DashboardComponent,
       },
-      /*       {
-        path: 'products',
-        component: ListProductsComponent
-      },
       {
+        path: 'certificates',
+        component: ListCertificatesComponent,
+      },
+      /* {
         path: 'categories',
         component: ListCategoriesComponent
       } */

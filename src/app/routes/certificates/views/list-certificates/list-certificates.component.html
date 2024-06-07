@@ -1,0 +1,114 @@
+<!-- <mat-divider></mat-divider> -->
+<mat-card class="black-card">
+  <div class="flex-container">
+    <mat-icon>{{ icon_header }}</mat-icon>
+    <h2>{{ title_header }}</h2>
+  </div>
+</mat-card>
+
+<mat-card>
+  <div class="header-buttons">
+    <!-- Export -->
+    <button class="start-button btn-arrow" mat-raised-button [matMenuTriggerFor]="menu">
+      <span class="button-text">Export Data</span>
+      <mat-icon class="icon-container">arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>remove_red_eye</mat-icon>
+        <span>See</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>picture_as_pdf</mat-icon>
+        <span>Pdf</span>
+      </button>
+      <!-- <button (click)="exportToExcel()" mat-menu-item>
+        <mat-icon>library_books</mat-icon>
+        <span>Excel</span>
+      </button> -->
+      <button mat-menu-item>
+        <mat-icon>local_printshop</mat-icon>
+        <span>Print</span>
+      </button>
+    </mat-menu>
+
+    <!-- New -->
+    <button (click)="openForm('0ms', '0ms')" class="end-button" mat-button mat-raised-button color="primary">
+      <mat-icon>add</mat-icon>
+      New
+    </button>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Start typing to search...</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" />
+  </mat-form-field>
+
+  <mat-card-content>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!-- Id Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+          <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+        </ng-container>
+
+        <!-- Title Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+          <td mat-cell *matCellDef="let row">{{ row.title }}</td>
+        </ng-container>
+
+        <!-- Institution Column -->
+        <ng-container matColumnDef="institution">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Institution</th>
+          <td mat-cell *matCellDef="let row">{{ row.institution }}</td>
+        </ng-container>
+
+        <!-- Graduation Date Column -->
+        <ng-container matColumnDef="graduationDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Graduation Date
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.graduationDate }}</td>
+        </ng-container>
+
+        <!-- Certificate Type Column -->
+        <ng-container matColumnDef="certificateType">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Certificate Type
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.certificateType }}</td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let row" class="row-align-rigth">
+            <!-- Edit -->
+            <button (click)="openForm('0ms', '0ms', row)" mat-icon-button matTooltip="Edit">
+              <mat-icon>edit</mat-icon>
+            </button>
+
+            <!-- Delete -->
+            <button (click)="delete('0ms', '0ms', row)" mat-icon-button matTooltip="Delete">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns" class="hoverRow"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell black-color" colspan="5">
+            No data matching the filter: {{ filterValue }}
+          </td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[4, 10]" showFirstLastButtons></mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>

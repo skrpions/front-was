@@ -42,7 +42,7 @@ mat-sidenav-content {
 
 .logo {
   position: relative;
-  margin-top: 12vh; /* Ajusta para que el logo quede justo debajo del background */
+  margin-top: 10vh;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;

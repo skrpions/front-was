@@ -1,0 +1,79 @@
+.flex-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.mat-icon {
+  font-size: 24px;
+}
+
+h2 {
+  margin: 0;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.black-card {
+  background-color: #091013;
+  color: white;
+  border-radius: 0;
+}
+
+mat-divider {
+  border-color: gray;
+}
+
+.btn-arrow {
+  position: relative;
+  overflow: hidden;
+}
+
+.button-text {
+  padding-right: 8px;
+}
+
+.icon-container {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  float: right;
+  padding-left: 5px;
+  transform: translateY(-50%);
+}
+
+.header-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 10px 15px 15px;
+}
+
+.start-button {
+  margin-top: 15px;
+  order: 1;
+}
+
+.end-button {
+  margin-top: 15px;
+  order: 2;
+}
+
+.end-button button {
+  margin-top: 10px;
+}
+
+.row-align-rigth {
+  padding-right: 40px !important;
+  text-align: end !important;
+}
+
+.row-align-rigth button {
+  margin-right: 5px !important;
+  margin-left: 5px !important;
+}
+
+.hoverRow:hover {
+  background: whitesmoke !important;
+}

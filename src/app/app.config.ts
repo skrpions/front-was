@@ -9,16 +9,18 @@ import { AuthInfrastructure } from './routes/auth/infrastructure/auth-infrastruc
 import { StorageInfrastructure } from './routes/auth/infrastructure/storage-infrastructure';
 import { provideToastr } from 'ngx-toastr';
 import { provideHttpClient } from '@angular/common/http';
+import { CertificateApplication } from './routes/certificates/application/certificate-application';
+import { CertificateInfrastructure } from './routes/certificates/infrastructure/certificate-infrastructure';
 
 const application = [
   AuthApplication,
   StorageApplication,
-  //ProductApplication,
+  CertificateApplication,
 ];
 const infrastructure = [
   AuthInfrastructure,
   StorageInfrastructure,
-  //ProductInfrastructure,
+  CertificateInfrastructure,
 ];
 
 export const appConfig: ApplicationConfig = {
