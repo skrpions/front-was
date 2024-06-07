@@ -31,7 +31,7 @@ export class ListCertificatesComponent {
     'id',
     'title',
     'institution',
-    'graduationDate',
+    'certificationDate',
     'certificateType',
     'actions',
   ]; // Adjusted displayed columns

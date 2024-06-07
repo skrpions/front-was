@@ -18,3 +18,7 @@ mat-toolbar[_ngcontent-ng-c615306003] {
   background-color: #091013;
   color: white;
 }
+
+.white {
+  color: white !important; /* Uso de!important para asegurar que este estilo tenga prioridad */
+}

@@ -2,7 +2,7 @@ export interface Certificate {
   id: number;
   title: string;
   institution: string;
-  graduationDate: string;
+  certificationDate: string;
   certificateType: string;
 }
 

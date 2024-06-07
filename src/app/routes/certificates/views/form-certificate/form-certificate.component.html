@@ -1,1 +1,98 @@
-<p>form-certificate works!</p>
+<mat-toolbar align="center" class="space-between black-toolbar">
+  <span class="centered">
+    <mat-icon>{{ icon_header }}</mat-icon>
+    {{ title_header }}
+  </span>
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-dialog-content>
+  <form [formGroup]="reactiveForm">
+
+    <div class="col-md-12">
+      <div class="row">
+        <!-- Title -->
+        <mat-form-field class="col-12" appearance="outline">
+          <mat-label>Title:</mat-label>
+          <input formControlName="title" type="text" matInput required />
+          @if (titleField?.hasError('required')){
+          <mat-error>Title is required</mat-error>
+          } @if (titleField?.hasError('minlength')){
+          <mat-error>Insufficient Characters</mat-error>
+          } @if (titleField?.hasError('maxlength')){
+          <mat-error>Character Limit Reached</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <!-- Institution -->
+        <mat-form-field class="col-12" appearance="outline">
+          <mat-label>Institution:</mat-label>
+          <input formControlName="institution" type="text" matInput required />
+          @if (institutionField?.hasError('required')){
+          <mat-error>institution is required</mat-error>
+          } @if (institutionField?.hasError('minlength')){
+          <mat-error>Insufficient Characters</mat-error>
+          } @if (institutionField?.hasError('maxlength')){
+          <mat-error>Character Limit Reached</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <!-- Certificate Type -->
+        <mat-form-field class="col-6" appearance="outline">
+          <mat-label>Certificate Type:</mat-label>
+          <mat-select formControlName="certificateType" placeholder="" required>
+            @for (certificateType of listCategories; track certificateType) {
+            <mat-option [value]="certificateType">
+              {{ certificateType }}
+            </mat-option>
+            } @empty { Empty list of categories }
+          </mat-select>
+          @if (certificateTypeField?.hasError('required')){
+          <mat-error>certificateType is required</mat-error>
+          } @if (certificateTypeField?.hasError('minlength')){
+          <mat-error>Insufficient Characters</mat-error>
+          } @if (certificateTypeField?.hasError('maxlength')){
+          <mat-error>Character Limit Reached</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Certification Date -->
+        <mat-form-field class="col-6" appearance="outline">
+          <mat-label>Certification Date:</mat-label>
+          <input formControlName="certificationDate" type="number" matInput required />
+          @if (certificationDateField?.hasError('required')){
+          <mat-error>certificationDate is required</mat-error>
+          } @if (certificationDateField?.hasError('minlength')){
+          <mat-error>Insufficient Characters</mat-error>
+          } @if (certificationDateField?.hasError('maxlength')){
+          <mat-error>Character Limit Reached</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <mat-dialog-actions>
+        <!-- Save -->
+        <button type="button" mat-raised-button mat-dialog-close color="primary" [disabled]="reactiveForm.invalid"
+          cdkFocusInitial (click)="save()">
+          <mat-icon>save</mat-icon>
+          Save
+        </button>
+
+        <!-- Close -->
+        <button class="black-close" type="button" mat-raised-button mat-dialog-close>
+          <mat-icon>close</mat-icon>
+          Close
+        </button>
+      </mat-dialog-actions>
+    </div>
+  </form>
+</mat-dialog-content>

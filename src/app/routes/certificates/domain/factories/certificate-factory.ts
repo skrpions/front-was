@@ -13,7 +13,7 @@ export class CertificateFactory {
       id: data.id ?? 0,
       title: data.title ?? '',
       institution: data.institution ?? '',
-      graduationDate: data.graduationDate ?? '',
+      certificationDate: data.certificationDate ?? '',
       certificateType: data.certificateType ?? '',
     };
 
@@ -33,7 +33,7 @@ export class CertificateFactory {
       return false; // Institution must be a non-empty string
     }
 
-    if (!data.graduationDate || typeof data.graduationDate !== 'string') {
+    if (!data.certificationDate || typeof data.certificationDate !== 'string') {
       return false; // Graduation date must be a non-empty string
     }
 

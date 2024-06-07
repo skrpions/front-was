@@ -1,0 +1,35 @@
+/* mat-form-field {
+  width: 100%;
+  font-size: 15px;
+} */
+
+.space-between {
+  justify-content: space-between;
+}
+
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-mdc-dialog-actions {
+  justify-content: end;
+  padding: 0px;
+  margin-bottom: 1.5rem;
+}
+
+.black-toolbar {
+  background-color: #212121;
+  color: white;
+}
+
+.black-close {
+  background-color: #212121 !important;
+  color: white;
+  margin-right: 13px;
+}
+
+mat-slider {
+  width: 100%;
+}
