@@ -1,1 +1,83 @@
-<p>sidenav works!</p>
+<div class="dashboard-container" [class.is-mobile]="mobileQuery.matches">
+  <!-- Toolbar -->
+  <mat-toolbar class="dashboard-toolbar">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>WAS</span>
+
+    <span class="example-spacer"></span>
+
+    <button mat-icon-button class="example-icon favorite-icon">
+      <mat-icon>fullscreen</mat-icon>
+    </button>
+
+    <button mat-icon-button [matMenuTriggerFor]="translate">
+      <mat-icon>translate</mat-icon>
+    </button>
+
+    <mat-menu #translate="matMenu">
+      <button mat-menu-item>
+        <mat-icon>account_circle</mat-icon>
+        <span>English</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Spanish</span>
+      </button>
+    </mat-menu>
+
+    <button mat-icon-button class="example-icon favorite-icon">
+      <mat-icon>help_outline</mat-icon>
+    </button>
+
+    <button mat-icon-button [matMenuTriggerFor]="profile">
+      <mat-icon>person_outline</mat-icon>
+    </button>
+    <mat-menu #profile="matMenu">
+      <button mat-menu-item>
+        <mat-icon>account_circle</mat-icon>
+        <span>Profile</span>
+      </button>
+      <button (click)="logout()" mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <!-- Sidenav -->
+  <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56" [opened]="true">
+      <mat-nav-list>
+        <!--profile-->
+        <div class="profile-card">
+          <div class="header">
+            <img class="avatar mat-elevation-z8" src="/images/avatars/sho.jpeg" />
+            <h4 class="name">{{ username }}</h4>
+            <!-- <p class="designation">sksmartinezgmail.com</p> -->
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <button [routerLink]="nav.route" *ngFor="let nav of menuNav" mat-button class="menu-button">
+          <mat-icon class="icono"> {{ nav.icon }}</mat-icon>
+          <span class="name">{{ nav.name }}</span>
+        </button>
+
+        <mat-divider></mat-divider>
+
+        <button (click)="logout()" mat-button class="menu-button">
+          <mat-icon>logout</mat-icon>
+          <span>Salir</span>
+        </button>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet />
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

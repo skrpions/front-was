@@ -29,7 +29,7 @@ export class LoginComponent {
   fb = inject(FormBuilder);
   router = inject(Router);
 
-  //private readonly authApplication = inject(AuthApplication);
+  private readonly authApplication = inject(AuthApplication);
 
   ngOnInit(): void {
     this.initForm();
@@ -63,6 +63,6 @@ export class LoginComponent {
     const credentials = this.reactiveForm.value;
     console.log('✅ ', credentials);
 
-    //this.authApplication.login(credentials);
+    this.authApplication.login(credentials);
   }
 }

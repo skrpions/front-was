@@ -1,0 +1,117 @@
+* {
+  box-sizing: border-box;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.is-mobile .dashboard-toolbar {
+  position: fixed;
+  z-index: 2;
+}
+
+.dashboard-toolbar {
+  background-color: #091013 !important;
+  color: white !important;
+}
+
+h1.app-name {
+  margin-left: 0.5rem; /* 8px */
+  margin-top: 1rem; /* 15px */
+}
+
+.sidenav-container {
+  flex: 1;
+  display: flex;
+}
+
+.is-mobile .sidenav-container {
+  flex: 1 0 auto;
+}
+
+ul li {
+  list-style: none;
+}
+
+.profile-card {
+  text-align: center;
+  padding: 0 1.25rem 1.25rem 1.25rem; /* 20px */
+}
+
+div ul {
+  display: flex;
+  align-items: center;
+}
+
+.right {
+  margin-left: auto;
+}
+
+.icono {
+  margin-right: 0.625rem; /* 10px */
+  color: white;
+}
+
+.name {
+  margin-bottom: 0.0625rem; /* 1px */
+  color: white;
+}
+
+mat-toolbar {
+  background-color: black;
+  color: white;
+}
+
+mat-sidenav {
+  width: 250px; /* Ajusta este valor según tus necesidades */
+  max-width: 250px; /* Asegura que no crezca más allá de este ancho */
+  background-image: url("/images/nav.png") !important;
+  border-right: none;
+  background: #091013;
+  color: white;
+  padding: 1rem; /* 16px */
+  background-size: cover;
+}
+
+button:hover {
+  background-color: #646464;
+}
+
+.menu-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 0.8rem;
+}
+
+.menu-button mat-icon,
+.menu-button span,
+.menu-button a {
+  margin-right: 0.5rem; /* 8px */
+  color: white;
+}
+
+mat-divider {
+  margin-top: 0.3125rem; /* 5px */
+  margin-bottom: 0.3125rem;
+  border-color: gray;
+}
+
+.avatar {
+  margin-top: 0;
+  width: 6.25rem; /* 100px */
+  height: 6.25rem;
+  border-radius: 3.125rem; /* 50px */
+}
