@@ -6,6 +6,7 @@ import { TokenEntity } from '../domain/entities/token-entity';
 import { StorageInfrastructure } from '../infrastructure/storage-infrastructure';
 import { StorageRepository } from '../domain/repositories/storage-repository';
 import { UtilsService } from '../../../shared/services/utils.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class AuthApplication {
@@ -23,7 +24,7 @@ export class AuthApplication {
   login(auth: any) {
     this.authRepository.login(auth).subscribe({
       next: this.userAuthenticated.bind(this),
-      error: () => this.showMessageError(),
+      error: (error) => this.handleError(error),
     });
   }
 
@@ -34,8 +35,15 @@ export class AuthApplication {
     this.router.navigateByUrl('/dashboard/home');
   }
 
-  private showMessageError() {
-    this.utilSrv.handleError('Incorrect username or password!');
+  private handleError(error: any) {
+    if (error.status === 0) {
+      // Si el error.status es 0, probablemente es un problema de conectividad con el servidor.
+      this.utilSrv.handleError('Server is down. Please try again later.');
+    } else {
+      // Manejar error de autenticación (credenciales incorrectas)
+      this.utilSrv.handleError('Incorrect Document Number!');
+      //this.utilSrv.handleError('Incorrect username or password!');
+    }
   }
 
   get isUserLogged(): boolean {

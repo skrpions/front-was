@@ -7,6 +7,7 @@
         <div class="login-form">
           <img class="logo avatar mat-elevation-z8" ngSrc="/images/avatars/sho.jpeg" width="100" height="100"
             priority />
+
           <form [formGroup]="reactiveForm" (ngSubmit)="send()">
             <div class="example-container">
               <!-- <h2 class="welcome">Welcome!</h2> -->
@@ -22,7 +23,7 @@
               <!-- Username -->
               <div class="form-field mt-2">
                 <mat-form-field appearance="outline" class="wide-form-field">
-                  <mat-label>Username:</mat-label>
+                  <mat-label>Document Number:</mat-label>
                   <input formControlName="username" matInput />
                   <mat-icon matSuffix>username</mat-icon>
                   @if (usernameField.hasError('required')){
@@ -32,7 +33,7 @@
               </div>
 
               <!-- Password -->
-              <div class="form-field">
+              <!-- <div class="form-field">
                 <mat-form-field appearance="outline" class="wide-form-field">
                   <mat-label>Password:</mat-label>
                   <input formControlName="password" matInput type="password" />
@@ -41,18 +42,25 @@
                   <mat-error>Password is required</mat-error>
                   }
                 </mat-form-field>
-              </div>
+              </div> -->
 
               <button type="submit" mat-raised-button color="primary" class="wide-form-field">
-                Sign In <mat-icon>send</mat-icon>
+                <span class="button-content">
+                  Sign In
+                  <mat-icon>send</mat-icon>
+                  <!-- <mat-icon *ngIf="!isLoading">send</mat-icon>
+                  <mat-spinner *ngIf="isLoading" diameter="18"></mat-spinner> -->
+                </span>
               </button>
 
-              <p class="register-link">
+
+              <!-- <p class="register-link">
                 ¿No tienes una cuenta?:
                 <a href="ruta-de-registro"> Regístrate</a>
-              </p>
+              </p> -->
             </div>
           </form>
+
         </div>
       </div>
     </div>

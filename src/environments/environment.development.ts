@@ -1,4 +1,5 @@
 export const environment = {
-  apiPath: 'https://fakestoreapi.com',
+  apiPath: 'http://localhost:3000/',
+  //apiPath: 'https://fakestoreapi.com',
   apiCertificates: 'https://retoolapi.dev/raVAvl/data',
 };

@@ -25,6 +25,7 @@ import { AuthApplication } from '../../application/auth-application';
 export class LoginComponent {
   reactiveForm!: FormGroup;
   errorSession: boolean = false;
+  //isLoading: boolean = false;
 
   fb = inject(FormBuilder);
   router = inject(Router);
@@ -37,15 +38,8 @@ export class LoginComponent {
 
   private initForm(): void {
     this.reactiveForm = this.fb.nonNullable.group({
-      username: ['mor_2314', [Validators.required]],
-      password: [
-        '83r5^_',
-        [
-          Validators.required,
-          Validators.minLength(5),
-          Validators.maxLength(12),
-        ],
-      ],
+      username: ['52148809', [Validators.required]],
+      password: [''],
     });
   }
 
@@ -53,16 +47,21 @@ export class LoginComponent {
     return this.reactiveForm.get('username')!;
   }
 
-  get passwordField() {
+  /* get passwordField() {
     return this.reactiveForm.get('password')!;
-  }
+  } */
 
   send(): void {
+    //this.isLoading = true;
     if (this.reactiveForm.invalid) return this.reactiveForm.markAllAsTouched(); // Activo todos los errores en el formGuest
 
     const credentials = this.reactiveForm.value;
-    console.log('✅ ', credentials);
+    credentials.password = this.usernameField.value; // Por ahora la contraseña será el mismo username
 
     this.authApplication.login(credentials);
+
+    /* if (this.authApplication.isUserLogged) {
+      this.isLoading = false;
+    } */
   }
 }

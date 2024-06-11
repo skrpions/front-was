@@ -27,10 +27,6 @@ export const routes: Routes = [
         path: 'certificates',
         component: ListCertificatesComponent,
       },
-      /* {
-        path: 'categories',
-        component: ListCategoriesComponent
-      } */
     ],
   },
   {
