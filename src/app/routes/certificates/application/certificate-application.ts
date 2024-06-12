@@ -37,7 +37,12 @@ export class CertificateApplication {
     return this.certificateRepository.delete(id);
   }
 
+  // --------------- Titles ---------------------
   listTitles(): Observable<TitleEntity[]> {
     return this.certificateRepository.listTitles();
+  }
+
+  addTitle(titleEntity: Partial<TitleEntity>): Observable<TitleEntity> {
+    return this.certificateRepository.addTitle(titleEntity);
   }
 }

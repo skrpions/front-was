@@ -13,5 +13,8 @@ export interface CertificateRepository {
     certificateEntity: Partial<CertificateEntity>
   ): Observable<CertificateEntity>;
   delete(id: number): Observable<CertificateEntity>;
+
+  // --------------- Titles ---------------------
   listTitles(): Observable<TitleEntity[]>;
+  addTitle(titleEntity: Partial<TitleEntity>): Observable<TitleEntity>;
 }

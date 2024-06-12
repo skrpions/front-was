@@ -9,10 +9,6 @@ import { TitleEntity } from '../domain/entities/title-entity';
 export class CertificateInfrastructure {
   constructor(private http: HttpClient) {}
 
-  listTitles(): Observable<TitleEntity[]> {
-    return this.http.get<TitleEntity[]>(`${environment.apiPath}api/titles`);
-  }
-
   list(): Observable<CertificateEntity[]> {
     return this.http.get<CertificateEntity[]>(
       `${environment.apiPath}api/certificates`
@@ -43,6 +39,18 @@ export class CertificateInfrastructure {
   delete(id: string): Observable<any> {
     return this.http.delete<any>(
       `${environment.apiPath}api/certificates/${id}`
+    );
+  }
+
+  // --------------- Titles ---------------------
+  listTitles(): Observable<TitleEntity[]> {
+    return this.http.get<TitleEntity[]>(`${environment.apiPath}api/titles`);
+  }
+
+  addTitle(entity: Partial<TitleEntity>): Observable<TitleEntity> {
+    return this.http.post<TitleEntity>(
+      `${environment.apiPath}api/titles`,
+      entity
     );
   }
 }

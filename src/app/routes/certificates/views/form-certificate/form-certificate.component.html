@@ -19,16 +19,16 @@
         <!-- Title -->
         <mat-form-field class="col-12" appearance="outline">
           <mat-label>Title:</mat-label>
-          <mat-select formControlName="titleId" placeholder="" required>
-            @for (title of listTitles; track title) {
-            <mat-option [value]="title.id">
+          <input type="text" matInput formControlName="titleId" [matAutocomplete]="auto" (input)="onTitleInput($event)"
+            #inputElement>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)">
+            <mat-option *ngFor="let title of filteredTitles | async" [value]="title.name">
               {{ title.name }}
             </mat-option>
-            } @empty { Empty list of titles }
-          </mat-select>
-          @if (titleIdField?.hasError('required')){
-          <mat-error>title is required</mat-error>
-          }
+            <mat-option *ngIf="showAddOption" (onSelectionChange)="addTitle(newTitle)">
+              <em>Add "{{ newTitle }}"</em>
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
         <!-- <mat-form-field class="col-12" appearance="outline">
           <mat-label>Title:</mat-label>
