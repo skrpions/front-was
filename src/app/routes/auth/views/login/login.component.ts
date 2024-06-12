@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthApplication } from '../../application/auth-application';
+import { SharedModule } from '../../../../shared/shared.module';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ import { AuthApplication } from '../../application/auth-application';
     MaterialModule,
     ReactiveFormsModule,
     NgOptimizedImage,
+    SharedModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',

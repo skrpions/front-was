@@ -24,7 +24,7 @@
               <div class="form-field mt-2">
                 <mat-form-field appearance="outline" class="wide-form-field">
                   <mat-label>Document Number:</mat-label>
-                  <input formControlName="username" matInput />
+                  <input formControlName="username" appOnlyNumbers matInput />
                   <mat-icon matSuffix>username</mat-icon>
                   @if (usernameField.hasError('required')){
                   <mat-error>Username is required</mat-error>

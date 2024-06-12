@@ -10,11 +10,12 @@ import { CertificateEntity } from '../../domain/entities/certificate-entity';
 import { MaterialModule } from '../../../../shared/material.module';
 import { CommonModule } from '@angular/common';
 import { UtilsService } from '../../../../shared/services/utils.service';
+import { SharedModule } from '../../../../shared/shared.module';
 
 @Component({
   selector: 'app-form-certificate',
   standalone: true,
-  imports: [CommonModule, MaterialModule, ReactiveFormsModule],
+  imports: [CommonModule, MaterialModule, ReactiveFormsModule, SharedModule],
   templateUrl: './form-certificate.component.html',
   styleUrl: './form-certificate.component.css',
 })

@@ -16,7 +16,7 @@
         <!-- Title -->
         <mat-form-field class="col-12" appearance="outline">
           <mat-label>Title:</mat-label>
-          <input formControlName="title" type="text" matInput required />
+          <input formControlName="title" type="text" appOnlyLetters matInput required />
           @if (titleField?.hasError('required')){
           <mat-error>Title is required</mat-error>
           } @if (titleField?.hasError('minlength')){
@@ -31,7 +31,7 @@
         <!-- Institution -->
         <mat-form-field class="col-12" appearance="outline">
           <mat-label>Institution:</mat-label>
-          <input formControlName="institution" type="text" matInput required />
+          <input formControlName="institution" type="text" appOnlyLetters matInput required />
           @if (institutionField?.hasError('required')){
           <mat-error>institution is required</mat-error>
           } @if (institutionField?.hasError('minlength')){
