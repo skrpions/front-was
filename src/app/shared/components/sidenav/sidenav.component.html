@@ -55,7 +55,7 @@
         <div class="profile-card">
           <div class="header">
             <img class="avatar mat-elevation-z8" src="/images/avatars/sho.jpeg" />
-            <h5 class="name">{{ username }}</h5>
+            <h5 class="name">{{ this.user?.name }} {{ this.user?.lastname }}</h5>
             <!-- <p class="designation">sksmartinezgmail.com</p> -->
           </div>
         </div>
@@ -71,7 +71,7 @@
 
         <button (click)="logout()" mat-button class="menu-button">
           <mat-icon>logout</mat-icon>
-          <span>Salir</span>
+          <span>Exit</span>
         </button>
       </mat-nav-list>
     </mat-sidenav>

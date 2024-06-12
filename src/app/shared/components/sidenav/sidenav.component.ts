@@ -3,7 +3,10 @@ import { CommonModule } from '@angular/common';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MaterialModule } from '../../material.module';
 import { RouterModule, Router } from '@angular/router';
-//import { AuthService } from '../../../core/services/auth.service';
+import { UtilsService } from '../../services/utils.service';
+import { Token } from '@angular/compiler';
+import { TokenResponse } from '../../../routes/auth/domain/entities/token-entity';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -14,24 +17,22 @@ import { RouterModule, Router } from '@angular/router';
 })
 export class SidenavComponent {
   private media = inject(MediaMatcher);
-  private router = inject(Router);
-  //private authSrv = inject(AuthService);
+  private utilSrv = inject(UtilsService);
+  private authSrv = inject(AuthService);
 
-  username = 'Nestor Martínez';
+  user!: TokenResponse;
   mobileQuery!: MediaQueryList; // Responsive media query
   menuNav = [
-    { name: 'Inicio', route: 'home', icon: 'dashboard' },
-    { name: 'Certificados', route: 'certificates', icon: 'badge' },
-    //{ name: 'Collaborators', route: 'colaborators', icon: 'people' },
+    { name: 'Home', route: 'home', icon: 'dashboard' },
+    { name: 'Certificates', route: 'certificates', icon: 'badge' },
   ];
 
   ngOnInit(): void {
     this.mobileQuery = this.media.matchMedia('(max-width: 600px)');
-    //this.username = this.keyCloakSrv.getUsername();
+    this.user = this.utilSrv.getUser();
   }
 
   logout(): void {
-    this.router.navigate(['/login']);
-    //this.authSrv.logout();
+    this.authSrv.logout();
   }
 }

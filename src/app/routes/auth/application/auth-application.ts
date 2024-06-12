@@ -30,6 +30,7 @@ export class AuthApplication {
 
   private userAuthenticated(response: TokenEntity) {
     this.storageRepository.setStorage('token', response.token);
+    this.utilSrv.decodeTokenAndSetUser(response.token);
     this.userLogged = true;
 
     this.router.navigateByUrl('/dashboard/home');

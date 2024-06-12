@@ -3,6 +3,7 @@ import { CertificateEntity } from '../entities/certificate-entity';
 
 export interface CertificateRepository {
   list(): Observable<CertificateEntity[]>;
+  listCertificatesById(id: number): Observable<CertificateEntity[]>;
   add(
     certificateEntity: Partial<CertificateEntity>
   ): Observable<CertificateEntity>;

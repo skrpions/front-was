@@ -28,13 +28,12 @@ export class ListCertificatesComponent {
 
   dataSource = new MatTableDataSource<any>();
   displayedColumns: string[] = [
-    'id',
     'title',
     'institution',
     'certificationDate',
     'certificateType',
     'actions',
-  ]; // Adjusted displayed columns
+  ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -42,7 +41,6 @@ export class ListCertificatesComponent {
   private readonly certificateApplication = inject(CertificateApplication); // Adjusted injection
   public dialog = inject(MatDialog);
   private utilSrv = inject(UtilsService);
-  //public toastr = inject(ToastrService);
 
   ngOnInit(): void {
     this.getAll();
@@ -50,8 +48,8 @@ export class ListCertificatesComponent {
   }
 
   getAll() {
-    this.certificateApplication.list().subscribe({
-      // Adjusted method call
+    const userId = this.utilSrv.getUser().id;
+    this.certificateApplication.listCertificatesById(userId).subscribe({
       next: (rawData: any) => {
         this.processResponse(rawData);
       },

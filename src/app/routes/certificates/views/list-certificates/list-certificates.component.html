@@ -47,11 +47,6 @@
   <mat-card-content>
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" matSort>
-        <!-- Id Column -->
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
-          <td mat-cell *matCellDef="let row">{{ row.id }}</td>
-        </ng-container>
 
         <!-- Title Column -->
         <ng-container matColumnDef="title">
@@ -70,7 +65,7 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             Certification Date
           </th>
-          <td mat-cell *matCellDef="let row">{{ row.certificationDate }}</td>
+          <td mat-cell *matCellDef="let row">{{ row.certificationDate | date}}</td>
         </ng-container>
 
         <!-- Certificate Type Column -->

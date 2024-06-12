@@ -15,6 +15,10 @@ export class CertificateApplication {
     return this.certificateRepository.list();
   }
 
+  listCertificatesById(id: number): Observable<CertificateEntity[]> {
+    return this.certificateRepository.listCertificatesById(id);
+  }
+
   add(
     certificateEntity: Partial<CertificateEntity>
   ): Observable<CertificateEntity> {

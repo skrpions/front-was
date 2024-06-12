@@ -8,9 +8,11 @@ import { StorageApplication } from './routes/auth/application/storage-applicatio
 import { AuthInfrastructure } from './routes/auth/infrastructure/auth-infrastructure';
 import { StorageInfrastructure } from './routes/auth/infrastructure/storage-infrastructure';
 import { provideToastr } from 'ngx-toastr';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { CertificateApplication } from './routes/certificates/application/certificate-application';
 import { CertificateInfrastructure } from './routes/certificates/infrastructure/certificate-infrastructure';
+import { tokenInterceptor } from './core/interceptors/token.interceptor';
+import { errorInterceptor } from './core/interceptors/error.interceptor';
 
 const application = [
   AuthApplication,
@@ -28,7 +30,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([tokenInterceptor, errorInterceptor])), // HttpClient
     provideToastr(), // Toastr providers
     ...application,
     ...infrastructure,
