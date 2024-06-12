@@ -11,10 +11,11 @@ export class CertificateFactory {
 
     const certificateEntity: CertificateEntity = {
       id: data.id ?? 0,
-      title: data.title ?? '',
+      titleId: data.titleId ?? 0,
       institution: data.institution ?? '',
       certificationDate: data.certificationDate ?? '',
       certificateType: data.certificateType ?? '',
+      userId: data.userId ?? 0,
     };
 
     return certificateEntity;
@@ -23,10 +24,6 @@ export class CertificateFactory {
   private isValidCertificateData(data: Partial<Certificate>): boolean {
     if (!data) {
       return false; // Validation fails if there's no data
-    }
-
-    if (!data.title || typeof data.title !== 'string') {
-      return false; // Title must be a non-empty string
     }
 
     if (!data.institution || typeof data.institution !== 'string') {

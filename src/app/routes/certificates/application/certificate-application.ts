@@ -3,6 +3,7 @@ import { CertificateRepository } from '../domain/repositories/certificate-reposi
 import { CertificateEntity } from '../domain/entities/certificate-entity';
 import { Inject, Injectable } from '@angular/core';
 import { CertificateInfrastructure } from '../infrastructure/certificate-infrastructure';
+import { TitleEntity } from '../domain/entities/title-entity';
 
 @Injectable()
 export class CertificateApplication {
@@ -34,5 +35,9 @@ export class CertificateApplication {
 
   delete(id: number): Observable<CertificateEntity> {
     return this.certificateRepository.delete(id);
+  }
+
+  listTitles(): Observable<TitleEntity[]> {
+    return this.certificateRepository.listTitles();
   }
 }

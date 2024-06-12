@@ -101,6 +101,8 @@ export class ListCertificatesComponent {
     reference.afterClosed().subscribe((response) => {
       if (!response) return;
 
+      console.log('response received', response);
+
       const id: number = response.id;
       delete response.id;
 

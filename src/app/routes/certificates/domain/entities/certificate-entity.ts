@@ -1,6 +1,6 @@
 export interface Certificate {
   id: number;
-  title: string;
+  titleId: number;
   institution: string;
   certificationDate: string;
   certificateType: string;

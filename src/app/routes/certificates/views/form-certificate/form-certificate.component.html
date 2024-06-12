@@ -9,6 +9,9 @@
 </mat-toolbar>
 
 <mat-dialog-content>
+
+  <!-- <pre>{{reactiveForm.value | json}}</pre> -->
+
   <form [formGroup]="reactiveForm">
 
     <div class="col-md-12">
@@ -16,15 +19,33 @@
         <!-- Title -->
         <mat-form-field class="col-12" appearance="outline">
           <mat-label>Title:</mat-label>
-          <input formControlName="title" type="text" appOnlyLetters matInput required />
-          @if (titleField?.hasError('required')){
-          <mat-error>Title is required</mat-error>
-          } @if (titleField?.hasError('minlength')){
-          <mat-error>Insufficient Characters</mat-error>
-          } @if (titleField?.hasError('maxlength')){
-          <mat-error>Character Limit Reached</mat-error>
+          <mat-select formControlName="titleId" placeholder="" required>
+            @for (title of listTitles; track title) {
+            <mat-option [value]="title.id">
+              {{ title.name }}
+            </mat-option>
+            } @empty { Empty list of titles }
+          </mat-select>
+          @if (titleIdField?.hasError('required')){
+          <mat-error>title is required</mat-error>
           }
         </mat-form-field>
+        <!-- <mat-form-field class="col-12" appearance="outline">
+          <mat-label>Title:</mat-label>
+          <input formControlName="title" type="text" matInput [matAutocomplete]="auto" required />
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)">
+            <mat-option *ngFor="let option of filteredTitles | async" [value]="option">
+              {{ option }}
+            </mat-option>
+            <mat-option *ngIf="(filteredTitles | async)?.length === 0" [disabled]="true">
+              No results found
+            </mat-option>
+            <mat-option *ngIf="showAddOption" (click)="addTitle(newTitle)">
+              Add "{{ newTitle }}"
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error *ngIf="reactiveForm.get('title')?.hasError('required')">Title is required</mat-error>
+        </mat-form-field> -->
       </div>
 
       <div class="row">
@@ -66,7 +87,6 @@
         <mat-form-field class="col-6" appearance="outline">
           <mat-label>Certification Date:</mat-label>
           <input formControlName="certificationDate" matInput [matDatepicker]="picker">
-          <mat-hint>MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
           @if (certificationDateField?.hasError('required')){

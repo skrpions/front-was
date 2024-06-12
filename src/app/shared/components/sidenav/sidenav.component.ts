@@ -24,7 +24,7 @@ export class SidenavComponent {
   mobileQuery!: MediaQueryList; // Responsive media query
   menuNav = [
     //{ name: 'Home', route: 'home', icon: 'dashboard' },
-    { name: 'Certificates', route: 'certificates', icon: 'badge' },
+    { name: 'Certificates', route: 'home', icon: 'badge' },
   ];
 
   ngOnInit(): void {

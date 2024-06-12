@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs';
 import { CertificateEntity } from '../entities/certificate-entity';
+import { TitleEntity } from '../entities/title-entity';
 
 export interface CertificateRepository {
   list(): Observable<CertificateEntity[]>;
@@ -12,4 +13,5 @@ export interface CertificateRepository {
     certificateEntity: Partial<CertificateEntity>
   ): Observable<CertificateEntity>;
   delete(id: number): Observable<CertificateEntity>;
+  listTitles(): Observable<TitleEntity[]>;
 }

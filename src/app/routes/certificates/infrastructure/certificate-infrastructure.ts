@@ -3,10 +3,15 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CertificateEntity } from '../domain/entities/certificate-entity';
 import { environment } from '../../../../environments/environment.development';
+import { TitleEntity } from '../domain/entities/title-entity';
 
 @Injectable()
 export class CertificateInfrastructure {
   constructor(private http: HttpClient) {}
+
+  listTitles(): Observable<TitleEntity[]> {
+    return this.http.get<TitleEntity[]>(`${environment.apiPath}api/titles`);
+  }
 
   list(): Observable<CertificateEntity[]> {
     return this.http.get<CertificateEntity[]>(
