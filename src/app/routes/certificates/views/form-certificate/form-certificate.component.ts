@@ -9,6 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CertificateEntity } from '../../domain/entities/certificate-entity';
 import { MaterialModule } from '../../../../shared/material.module';
 import { CommonModule } from '@angular/common';
+import { UtilsService } from '../../../../shared/services/utils.service';
 
 @Component({
   selector: 'app-form-certificate',
@@ -23,13 +24,17 @@ export class FormCertificateComponent {
   reactiveForm!: FormGroup;
   photoToShow = '';
   listCategories: string[] = [
-    'electronics',
-    'jewelery',
-    "men's clothing",
-    "women's clothing",
+    'Pregrado',
+    'Posgrado',
+    'Certificación',
+    'Maestría',
+    'Doctorado',
+    'Diplomado',
+    'Curso',
   ];
 
   private fb = inject(FormBuilder);
+  private utilSrv = inject(UtilsService);
   private data: CertificateEntity = inject(MAT_DIALOG_DATA);
   private reference = inject(MatDialogRef);
 
@@ -94,6 +99,9 @@ export class FormCertificateComponent {
     if (this.reactiveForm.invalid) return this.reactiveForm.markAllAsTouched(); // Activate all errors
 
     const record: CertificateEntity = this.reactiveForm.value;
+    record.userId = this.utilSrv.getUser().id;
+    console.log('Saving certificate: ' + JSON.stringify(record));
+
     //record.image = 'https://latit.co/wp-content/uploads/2021/05/1050707-1.jpg';
 
     this.reference.close(record);

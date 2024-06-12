@@ -23,19 +23,21 @@ export class CertificateInfrastructure {
 
   add(entity: Partial<CertificateEntity>): Observable<CertificateEntity> {
     return this.http.post<CertificateEntity>(
-      `${environment.apiPath}/certificates`,
+      `${environment.apiPath}api/certificates`,
       entity
     );
   }
 
   update(id: string, entity: CertificateEntity): Observable<CertificateEntity> {
     return this.http.put<CertificateEntity>(
-      `${environment.apiPath}/certificates/${id}`,
+      `${environment.apiPath}api/certificates/${id}`,
       entity
     );
   }
 
   delete(id: string): Observable<any> {
-    return this.http.delete<any>(`${environment.apiPath}/certificates/${id}`);
+    return this.http.delete<any>(
+      `${environment.apiPath}api/certificates/${id}`
+    );
   }
 }

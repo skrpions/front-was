@@ -23,7 +23,7 @@ export class SidenavComponent {
   user!: TokenResponse;
   mobileQuery!: MediaQueryList; // Responsive media query
   menuNav = [
-    { name: 'Home', route: 'home', icon: 'dashboard' },
+    //{ name: 'Home', route: 'home', icon: 'dashboard' },
     { name: 'Certificates', route: 'certificates', icon: 'badge' },
   ];
 

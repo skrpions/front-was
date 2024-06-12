@@ -128,8 +128,9 @@ export class ListCertificatesComponent {
   }
 
   private addCertificate(response: any) {
+    console.log('response', response);
+
     this.certificateApplication.add(response).subscribe({
-      // Adjusted method call
       next: (response) => {
         this.utilSrv.handleSuccess('Added');
         this.getAll();

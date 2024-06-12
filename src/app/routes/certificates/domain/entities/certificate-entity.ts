@@ -4,6 +4,7 @@ export interface Certificate {
   institution: string;
   certificationDate: string;
   certificateType: string;
+  userId: number;
 }
 
 export type CertificateEntity = Required<Certificate>;

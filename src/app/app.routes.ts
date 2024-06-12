@@ -22,12 +22,16 @@ export const routes: Routes = [
     children: [
       {
         path: 'home',
+        component: ListCertificatesComponent,
+      },
+      /* {
+        path: 'home',
         component: DashboardComponent,
       },
       {
         path: 'certificates',
         component: ListCertificatesComponent,
-      },
+      }, */
     ],
   },
   {
