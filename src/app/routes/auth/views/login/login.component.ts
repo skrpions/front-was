@@ -10,6 +10,7 @@ import {
 import { Router } from '@angular/router';
 import { AuthApplication } from '../../application/auth-application';
 import { SharedModule } from '../../../../shared/shared.module';
+import { INPUT_VALIDATORS } from '../../../../shared/services/constants';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +28,7 @@ import { SharedModule } from '../../../../shared/shared.module';
 export class LoginComponent {
   reactiveForm!: FormGroup;
   errorSession: boolean = false;
-  //isLoading: boolean = false;
+  custom_validators = INPUT_VALIDATORS;
 
   fb = inject(FormBuilder);
   router = inject(Router);
@@ -40,7 +41,13 @@ export class LoginComponent {
 
   private initForm(): void {
     this.reactiveForm = this.fb.nonNullable.group({
-      username: ['52148809', [Validators.required]],
+      username: [
+        '52148809',
+        [
+          Validators.required,
+          Validators.maxLength(this.custom_validators.maxLength.username),
+        ],
+      ],
       password: [''],
     });
   }
