@@ -1,0 +1,30 @@
+<mat-toolbar align="center" class="space-between black-toolbar">
+  <span class="centered">
+    <mat-icon>{{ icon_header }}</mat-icon>
+    {{ title_header }}
+  </span>
+  <button class="white" mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-dialog-content>
+  <h3 align="center">
+    <strong>{{ name }}</strong>
+  </h3>
+  <p align="start">{{ question }}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" style="margin: 20px">
+  <!-- Yes -->
+  <button mat-raised-button color="warn" mat-dialog-close="Si" cdkFocusInitial>
+    <mat-icon>thumb_up</mat-icon>
+    Yes
+  </button>
+
+  <!-- No -->
+  <button mat-raised-button color="" mat-dialog-close>
+    <mat-icon>thumb_down</mat-icon>
+    No
+  </button>
+</mat-dialog-actions>

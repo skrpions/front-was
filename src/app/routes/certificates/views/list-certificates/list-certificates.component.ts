@@ -9,6 +9,7 @@ import { CertificateApplication } from '../../application/certificate-applicatio
 import { CertificateEntity } from '../../domain/entities/certificate-entity'; // Adjusted import
 import { FormCertificateComponent } from '../form-certificate/form-certificate.component'; // Adjusted import
 import { UtilsService } from '../../../../shared/services/utils.service';
+import { ConfirmComponent } from '../../../../shared/components/confirm/confirm.component';
 
 @Component({
   selector: 'app-list-certificates', // Adjusted selector
@@ -146,25 +147,22 @@ export class ListCertificatesComponent {
     exitAnimationDuration: string,
     row: any = null!
   ) {
-    /*  const reference = this.dialog.open(ConfirmComponent, {
+    const reference = this.dialog.open(ConfirmComponent, {
       data: row,
       width: '350px',
       enterAnimationDuration,
-      exitAnimationDuration
+      exitAnimationDuration,
     });
 
-    reference.afterClosed().subscribe(response => {
-
+    reference.afterClosed().subscribe((response) => {
       if (!response) return;
 
-      this.certificateApplication.delete(row.id).subscribe({ // Adjusted method call
+      this.certificateApplication.delete(row.id).subscribe({
         next: () => {
-
           this.utilSrv.handleSuccess('Deleted');
           this.getAll();
         },
       });
-
-    }); */
+    });
   }
 }

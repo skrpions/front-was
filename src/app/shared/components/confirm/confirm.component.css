@@ -1,0 +1,19 @@
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.mat-mdc-dialog-actions {
+  justify-content: end;
+  padding: 0px;
+}
+
+.black-toolbar {
+  background-color: #212121;
+  color: white;
+}
