@@ -5,11 +5,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import { CertificateApplication } from '../../application/certificate-application'; // Adjusted import
-import { CertificateEntity } from '../../domain/entities/certificate-entity'; // Adjusted import
-import { FormCertificateComponent } from '../form-certificate/form-certificate.component'; // Adjusted import
+import { CertificateApplication } from '../../application/certificate-application';
+import { CertificateEntity } from '../../domain/entities/certificate-entity';
+import { FormCertificateComponent } from '../form-certificate/form-certificate.component';
 import { UtilsService } from '../../../../shared/services/utils.service';
 import { ConfirmComponent } from '../../../../shared/components/confirm/confirm.component';
+import { ExportService } from '../../../../shared/services/export.service';
 
 @Component({
   selector: 'app-list-certificates',
@@ -41,6 +42,7 @@ export class ListCertificatesComponent {
   private readonly certificateApplication = inject(CertificateApplication);
   public dialog = inject(MatDialog);
   private utilSrv = inject(UtilsService);
+  private exportSrv = inject(ExportService);
 
   ngOnInit(): void {
     this.getAll();

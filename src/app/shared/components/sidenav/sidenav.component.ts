@@ -40,8 +40,6 @@ export class SidenavComponent {
     this.mobileQuery = this.media.matchMedia('(max-width: 600px)');
     const rawUser = this.storageApplication.getField('user');
     this.user = rawUser ? JSON.parse(rawUser) : null;
-
-    console.log('user:', this.user);
   }
 
   logout(): void {

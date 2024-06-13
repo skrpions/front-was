@@ -8,29 +8,6 @@
 
 <mat-card>
   <div class="header-buttons">
-    <!-- Export -->
-    <button class="start-button btn-arrow" mat-raised-button [matMenuTriggerFor]="menu">
-      <span class="button-text">Export Data</span>
-      <mat-icon class="icon-container">arrow_drop_down</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>
-        <mat-icon>remove_red_eye</mat-icon>
-        <span>See</span>
-      </button>
-      <button mat-menu-item>
-        <mat-icon>picture_as_pdf</mat-icon>
-        <span>Pdf</span>
-      </button>
-      <!-- <button (click)="exportToExcel()" mat-menu-item>
-        <mat-icon>library_books</mat-icon>
-        <span>Excel</span>
-      </button> -->
-      <button mat-menu-item>
-        <mat-icon>local_printshop</mat-icon>
-        <span>Print</span>
-      </button>
-    </mat-menu>
 
     <!-- New -->
     <button (click)="openForm('0ms', '0ms')" class="end-button" mat-button mat-raised-button color="primary">

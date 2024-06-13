@@ -16,6 +16,7 @@ import { CertificateApplication } from '../../application/certificate-applicatio
 import { TitleEntity } from '../../domain/entities/title-entity';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { CERTIFICATE_TYPES } from '../../../../shared/services/constants';
+import { TokenResponse } from '../../../auth/domain/entities/token-entity';
 
 @Component({
   selector: 'app-form-certificate',

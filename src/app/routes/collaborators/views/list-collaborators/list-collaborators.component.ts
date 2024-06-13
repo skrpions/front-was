@@ -7,6 +7,7 @@ import { CertificateApplication } from '../../../certificates/application/certif
 import { CertificateEntity } from '../../../certificates/domain/entities/certificate-entity';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../../../shared/material.module';
+import { ExportService } from '../../../../shared/services/export.service';
 
 @Component({
   selector: 'app-list-collaborators',
@@ -30,7 +31,6 @@ export class ListCollaboratorsComponent {
     'institution',
     'certificationDate',
     'certificateType',
-    'actions',
   ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -38,6 +38,7 @@ export class ListCollaboratorsComponent {
 
   private readonly certificateApplication = inject(CertificateApplication);
   public dialog = inject(MatDialog);
+  private exportSrv = inject(ExportService);
 
   ngOnInit(): void {
     this.getAllCollaborators();
@@ -59,6 +60,15 @@ export class ListCollaboratorsComponent {
 
     listCertificates.forEach((certificate: CertificateEntity) => {
       data.push(certificate);
+    });
+
+    // Sort data alphabetically by user name
+    data.sort((a, b) => {
+      const nameA = a.userId;
+      const nameB = b.userId;
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
     });
 
     this.dataSource = new MatTableDataSource<CertificateEntity>(data);
@@ -85,5 +95,26 @@ export class ListCollaboratorsComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  exportToExcel() {
+    const dataToExport = this.dataSource.data.map((row) => ({
+      Collaborator: `${row.user.name} ${row.user.lastname}`,
+      Title: row.title.name,
+      Institution: row.institution,
+      'Certification Date': this.formatDateString(
+        new Date(row.certificationDate)
+      ),
+      'Certificate Type': row.certificateType,
+    }));
+
+    this.exportSrv.exportAsExcelFile(dataToExport, 'exported_data');
+  }
+
+  formatDateString(date: Date): string {
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Los meses son indexados desde 0
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
   }
 }
