@@ -11,7 +11,7 @@ import { MaterialModule } from '../../../../shared/material.module';
 import { CommonModule } from '@angular/common';
 import { UtilsService } from '../../../../shared/services/utils.service';
 import { SharedModule } from '../../../../shared/shared.module';
-import { Observable, map, of, startWith } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { CertificateApplication } from '../../application/certificate-application';
 import { TitleEntity } from '../../domain/entities/title-entity';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
@@ -26,15 +26,15 @@ import { CERTIFICATE_TYPES } from '../../../../shared/services/constants';
 })
 export class FormCertificateComponent {
   @ViewChild('inputElement', { read: ElementRef, static: false })
-  readonly minDate = new Date(1970, 0, 1); // Fecha mínima: 1 de enero de 1970
-  readonly maxDate = new Date(); // Fecha máxima: hoy
+  readonly minDate = new Date(1970, 0, 1); // Minimum date: January 1, 1970
+  readonly maxDate = new Date(); // Maximum date: today
 
   inputElement!: ElementRef;
   icon_header = '';
   title_header = '';
   reactiveForm!: FormGroup;
   photoToShow = '';
-  listCategories: string[] = CERTIFICATE_TYPES;
+  listCategories: string[] = CERTIFICATE_TYPES.sort(); // Order alphabetically
   titles: any[] = [];
   listTitles: string[] = [];
 
@@ -74,7 +74,10 @@ export class FormCertificateComponent {
     this.certificateApplication.listTitles().subscribe({
       next: (rawData: TitleEntity[]) => {
         this.titles = rawData; // Store data in TitleEntity array
-        this.filteredTitles = of(this.titles); // Initialize filtered Titles
+        // Sorting the titles alphabetically right here
+        this.filteredTitles = of(
+          rawData.sort((a, b) => a.name.localeCompare(b.name))
+        );
 
         const selectedTitle = this.reactiveForm.get('titleId')?.value;
         if (selectedTitle) {
@@ -105,13 +108,13 @@ export class FormCertificateComponent {
 
   onTitleInput(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const inputValue = input.value.toLowerCase(); // Convert input value to lowercase
+    const inputValue = input.value.toLowerCase();
 
     this.showAddOption = !this.titles.some(
       (option) => option.name.toLowerCase() === inputValue
     );
 
-    // Asegura que al menos la primera letra sea mayúscula
+    // Make sure that at least the first letter is uppercase
     this.newTitle = inputValue.charAt(0).toUpperCase() + inputValue.slice(1);
 
     // Filtra filteredTitles basado en el valor del input
