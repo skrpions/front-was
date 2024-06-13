@@ -41,6 +41,8 @@ export class UtilsService {
 
     const decodedToken: TokenResponse = jwtDecode(token);
     this.storageApplication.setField('user', JSON.stringify(decodedToken));
+
+    this.setUser(decodedToken);
   }
 
   handleSuccess(action: string) {
