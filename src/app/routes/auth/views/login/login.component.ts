@@ -42,7 +42,7 @@ export class LoginComponent {
   private initForm(): void {
     this.reactiveForm = this.fb.nonNullable.group({
       username: [
-        '52148809',
+        '',
         [
           Validators.required,
           Validators.maxLength(this.custom_validators.maxLength.username),
