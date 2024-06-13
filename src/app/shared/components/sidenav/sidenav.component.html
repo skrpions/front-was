@@ -62,25 +62,11 @@
 
         <mat-divider></mat-divider>
 
-        @if (this.user?.username === '52148809'){
-        <button [routerLink]="nav.route" *ngFor="let nav of menuNavAdmin" mat-button class="menu-button">
+        <!-- Options Sidenav -->
+        <button [routerLink]="nav.route" *ngFor="let nav of currentMenu" mat-button class="menu-button">
           <mat-icon class="icono"> {{ nav.icon }}</mat-icon>
           <span class="name">{{ nav.name }}</span>
         </button>
-        }
-        @if (this.user?.username !== '52148809'){
-        <button [routerLink]="nav.route" *ngFor="let nav of menuNav" mat-button class="menu-button">
-          <mat-icon class="icono"> {{ nav.icon }}</mat-icon>
-          <span class="name">{{ nav.name }}</span>
-        </button>
-        }
-
-        <!-- <button [routerLink]="(this.user?.username === '52148809'? nav.route : '')"
-          *ngFor="let nav of (this.user?.username === '52148809'? menuNavAdmin : menuNav)" mat-button
-          class="menu-button">
-          <mat-icon class="icono">{{ nav.icon }}</mat-icon>
-          <span class="name">{{ nav.name }}</span>
-        </button> -->
 
         <mat-divider></mat-divider>
 

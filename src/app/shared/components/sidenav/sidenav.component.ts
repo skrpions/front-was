@@ -47,4 +47,10 @@ export class SidenavComponent {
   logout(): void {
     this.authSrv.logout();
   }
+
+  get currentMenu(): { name: string; route: string; icon: string }[] {
+    return this.user?.username === '52148809'
+      ? this.menuNavAdmin
+      : this.menuNav;
+  }
 }
