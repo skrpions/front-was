@@ -7,6 +7,7 @@ import { UtilsService } from '../../services/utils.service';
 import { Token } from '@angular/compiler';
 import { TokenResponse } from '../../../routes/auth/domain/entities/token-entity';
 import { AuthService } from '../../../core/services/auth.service';
+import { StorageApplication } from '../../../routes/auth/application/storage-application';
 
 @Component({
   selector: 'app-sidenav',
@@ -19,6 +20,7 @@ export class SidenavComponent {
   private media = inject(MediaMatcher);
   private utilSrv = inject(UtilsService);
   private authSrv = inject(AuthService);
+  private readonly storageApplication = inject(StorageApplication);
 
   user!: TokenResponse;
   userHasAccess = this.user?.username === '52148809';
@@ -36,7 +38,10 @@ export class SidenavComponent {
 
   ngOnInit(): void {
     this.mobileQuery = this.media.matchMedia('(max-width: 600px)');
-    this.user = this.utilSrv.getUser();
+    const rawUser = this.storageApplication.getField('user');
+    this.user = rawUser ? JSON.parse(rawUser) : null;
+
+    console.log('user:', this.user);
   }
 
   logout(): void {

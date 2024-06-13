@@ -21,6 +21,11 @@ export class UtilsService {
   private toastr = inject(ToastrService);
   private readonly storageApplication = inject(StorageApplication);
 
+  constructor() {
+    const rawUser = this.storageApplication.getField('user');
+    this.user = rawUser ? JSON.parse(rawUser) : null;
+  }
+
   setUser(user: TokenResponse) {
     this.user = user;
   }
@@ -35,8 +40,7 @@ export class UtilsService {
     }
 
     const decodedToken: TokenResponse = jwtDecode(token);
-
-    this.setUser(decodedToken);
+    this.storageApplication.setField('user', JSON.stringify(decodedToken));
   }
 
   handleSuccess(action: string) {
