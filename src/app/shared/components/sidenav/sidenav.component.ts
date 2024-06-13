@@ -21,10 +21,17 @@ export class SidenavComponent {
   private authSrv = inject(AuthService);
 
   user!: TokenResponse;
+  userHasAccess = this.user?.username === '52148809';
+
   mobileQuery!: MediaQueryList; // Responsive media query
   menuNav = [
     //{ name: 'Home', route: 'home', icon: 'dashboard' },
     { name: 'Certificates', route: 'home', icon: 'badge' },
+  ];
+  menuNavAdmin = [
+    //{ name: 'Home', route: 'home', icon: 'dashboard' },
+    { name: 'Certificates', route: 'home', icon: 'badge' },
+    { name: 'Collaborators', route: 'collaborators', icon: 'people' },
   ];
 
   ngOnInit(): void {

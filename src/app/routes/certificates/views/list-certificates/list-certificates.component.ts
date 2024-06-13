@@ -12,16 +12,15 @@ import { UtilsService } from '../../../../shared/services/utils.service';
 import { ConfirmComponent } from '../../../../shared/components/confirm/confirm.component';
 
 @Component({
-  selector: 'app-list-certificates', // Adjusted selector
+  selector: 'app-list-certificates',
   standalone: true,
-  imports: [CommonModule, MaterialModule], // Removed NgOptimizedImage import
-  templateUrl: './list-certificates.component.html', // Adjusted template URL
-  styleUrl: './list-certificates.component.scss', // Adjusted style URL
+  imports: [CommonModule, MaterialModule],
+  templateUrl: './list-certificates.component.html',
+  styleUrl: './list-certificates.component.scss',
 })
 export class ListCertificatesComponent {
-  icon_header = 'badge'; // Adjusted icon
-  title_header = 'Certificados'; // Adjusted title
-  //messages!: Messages;
+  icon_header = 'badge';
+  title_header = 'Certificados';
 
   filterValue = '';
   totalRecords = 0;
@@ -45,7 +44,6 @@ export class ListCertificatesComponent {
 
   ngOnInit(): void {
     this.getAll();
-    //this.isAdministrator = this.utilSrv.isAdministrator();
   }
 
   getAll() {
@@ -74,9 +72,24 @@ export class ListCertificatesComponent {
   }
 
   applyFilter(event: Event) {
-    this.filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = this.filterValue.trim().toLowerCase();
+    const filterValue = (event.target as HTMLInputElement).value;
 
+    // Actualiza el filterPredicate para filtrar por title.name
+    this.dataSource.filterPredicate = (data: any, filterString: string) => {
+      // Convierte el filterString a minúsculas para la comparación
+      const lowerCaseFilterString = filterString.trim().toLowerCase();
+
+      // Accede a title.name y conviértelo a minúsculas para la comparación
+      const titleName = data.title ? data.title.name.toLowerCase() : '';
+
+      // Realiza la comparación entre el valor de title.name y el filtro ingresado
+      return titleName.includes(lowerCaseFilterString);
+    };
+
+    // Aplica el filtro actualizado
+    this.dataSource.filter = filterValue;
+
+    // Reinicia la paginación si está presente
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -88,7 +101,6 @@ export class ListCertificatesComponent {
     row: any = null!
   ) {
     const reference = this.dialog.open(FormCertificateComponent, {
-      // Adjusted component reference
       data: row,
       width: '750px',
       enterAnimationDuration,
@@ -113,7 +125,6 @@ export class ListCertificatesComponent {
 
   private updateCertificate(id: any, response: any) {
     this.certificateApplication.update(id, response).subscribe({
-      // Adjusted method call
       next: (reponse) => {
         console.log('✅ ', response);
         this.utilSrv.handleSuccess('Updated');
