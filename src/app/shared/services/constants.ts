@@ -7,3 +7,14 @@ export const INPUT_VALIDATORS = {
     password: 15,
   },
 };
+
+export const CERTIFICATE_TYPES = [
+  'Pregrado',
+  'Posgrado',
+  'Especialización',
+  'Certificación',
+  'Maestría',
+  'Doctorado',
+  'Diplomado',
+  'Curso',
+];

@@ -10,8 +10,6 @@
 
 <mat-dialog-content>
 
-  <!-- <pre>{{reactiveForm.value | json}}</pre> -->
-
   <form [formGroup]="reactiveForm">
 
     <div class="col-md-12">
@@ -20,32 +18,20 @@
         <mat-form-field class="col-12" appearance="outline">
           <mat-label>Title:</mat-label>
           <input type="text" matInput formControlName="titleId" [matAutocomplete]="auto" (input)="onTitleInput($event)"
-            #inputElement>
+            #inputElement />
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)">
-            <mat-option *ngFor="let title of filteredTitles | async" [value]="title.name">
-              {{ title.name }}
-            </mat-option>
+            <ng-container *ngFor="let title of filteredTitles | async">
+              <mat-option [value]="title.id"> {{ title.name | titlecase}} </mat-option>
+            </ng-container>
             <mat-option *ngIf="showAddOption" (onSelectionChange)="addTitle(newTitle)">
               <em>Add "{{ newTitle }}"</em>
             </mat-option>
           </mat-autocomplete>
+          @if (titleIdField?.hasError('required')){
+          <mat-error>Title is required</mat-error>
+          }
         </mat-form-field>
-        <!-- <mat-form-field class="col-12" appearance="outline">
-          <mat-label>Title:</mat-label>
-          <input formControlName="title" type="text" matInput [matAutocomplete]="auto" required />
-          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)">
-            <mat-option *ngFor="let option of filteredTitles | async" [value]="option">
-              {{ option }}
-            </mat-option>
-            <mat-option *ngIf="(filteredTitles | async)?.length === 0" [disabled]="true">
-              No results found
-            </mat-option>
-            <mat-option *ngIf="showAddOption" (click)="addTitle(newTitle)">
-              Add "{{ newTitle }}"
-            </mat-option>
-          </mat-autocomplete>
-          <mat-error *ngIf="reactiveForm.get('title')?.hasError('required')">Title is required</mat-error>
-        </mat-form-field> -->
+
       </div>
 
       <div class="row">
@@ -86,7 +72,7 @@
         <!-- Certification Date -->
         <mat-form-field class="col-6" appearance="outline">
           <mat-label>Certification Date:</mat-label>
-          <input formControlName="certificationDate" matInput [matDatepicker]="picker">
+          <input formControlName="certificationDate" [min]="minDate" [max]="maxDate" matInput [matDatepicker]="picker">
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
           @if (certificationDateField?.hasError('required')){

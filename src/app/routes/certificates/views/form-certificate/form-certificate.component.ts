@@ -15,6 +15,7 @@ import { Observable, map, of, startWith } from 'rxjs';
 import { CertificateApplication } from '../../application/certificate-application';
 import { TitleEntity } from '../../domain/entities/title-entity';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { CERTIFICATE_TYPES } from '../../../../shared/services/constants';
 
 @Component({
   selector: 'app-form-certificate',
@@ -25,28 +26,17 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 })
 export class FormCertificateComponent {
   @ViewChild('inputElement', { read: ElementRef, static: false })
+  readonly minDate = new Date(1970, 0, 1); // Fecha mínima: 1 de enero de 1970
+  readonly maxDate = new Date(); // Fecha máxima: hoy
+
   inputElement!: ElementRef;
   icon_header = '';
   title_header = '';
   reactiveForm!: FormGroup;
   photoToShow = '';
-  listCategories: string[] = [
-    'Pregrado',
-    'Posgrado',
-    'Certificación',
-    'Maestría',
-    'Doctorado',
-    'Diplomado',
-    'Curso',
-  ];
-  /* titles: string[] = [
-    'Ingeniería de Sistemas',
-    'Ingeniería Industrial',
-    'Scrum Fundamentals',
-    'PMP',
-    'Gerencia de Proyectos',
-  ]; */
-  listTitles: TitleEntity[] = [];
+  listCategories: string[] = CERTIFICATE_TYPES;
+  titles: any[] = [];
+  listTitles: string[] = [];
 
   filteredTitles!: Observable<TitleEntity[]>;
   newTitle: string = '';
@@ -78,68 +68,64 @@ export class FormCertificateComponent {
       certificateType: [this.data?.certificateType, [Validators.required]],
       certificationDate: [this.data?.certificationDate, [Validators.required]],
     });
-
-    this.filteredTitles = this.reactiveForm.controls[
-      'titleId'
-    ].valueChanges.pipe(
-      startWith(''),
-      map((value) => this._filter(value))
-    );
   }
 
   getAllTitles() {
     this.certificateApplication.listTitles().subscribe({
       next: (rawData: TitleEntity[]) => {
-        this.processResponse(rawData);
+        this.titles = rawData; // Store data in TitleEntity array
+        this.filteredTitles = of(this.titles); // Initialize filtered Titles
+
         const selectedTitle = this.reactiveForm.get('titleId')?.value;
         if (selectedTitle) {
-          const title = this.listTitles.find((t) => t.id === selectedTitle);
+          const title = this.titles.find((t) => t.id === selectedTitle);
           if (title) {
-            this.reactiveForm.get('titleId')?.setValue(title.id);
+            this.reactiveForm.get('titleId')?.setValue(title.name); // Set selected title name
           }
         }
       },
     });
   }
 
-  processResponse(rawData: TitleEntity[]) {
-    console.log('rawData', rawData);
-
-    this.listTitles = rawData.sort((a, b) => {
-      const aId = a?.id || 0; // Asignar 0 si a.id es nulo o undefined
-      const bId = b?.id || 0; // Asignar 0 si b.id es nulo o undefined
-      return aId - bId;
-    });
-
-    console.log('listTitles', this.listTitles);
-  }
-
-  private _filter(value: string): TitleEntity[] {
-    const filterValue = parseInt(value, 10); // Convierte a número
-
-    this.showAddOption = !this.listTitles.some(
-      (option) => option.id === filterValue
-    );
-
-    this.newTitle =
-      this.listTitles.find((option) => option.id === filterValue)?.name || '';
-    return this.listTitles.filter((option) => option.id !== filterValue);
-  }
-
   optionSelected(event: MatAutocompleteSelectedEvent): void {
-    const selectedTitle = this.listTitles.find(
+    const selectedTitle = this.titles.find(
       (title) => title.id === event.option.value
     );
     if (selectedTitle) {
-      this.reactiveForm.get('titleId')?.setValue(selectedTitle.name);
-      this.reactiveForm.get('titleId')?.updateValueAndValidity();
-      this.reactiveForm.controls['titleId'].setErrors(null);
+      this.reactiveForm.get('titleId')?.setValue(selectedTitle.name); // Set selected title name
+      this.reactiveForm.get('titleId')?.updateValueAndValidity(); // Update value and validity
+      this.reactiveForm.controls['titleId'].setErrors(null); // Clear errors
 
-      // Establecer el nombre del título en el campo de entrada
+      // Set the title name in the input field
       if (this.inputElement) {
         this.inputElement.nativeElement.value = selectedTitle.name;
       }
     }
+  }
+
+  onTitleInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const inputValue = input.value.toLowerCase(); // Convert input value to lowercase
+
+    this.showAddOption = !this.titles.some(
+      (option) => option.name.toLowerCase() === inputValue
+    );
+
+    // Asegura que al menos la primera letra sea mayúscula
+    this.newTitle = inputValue.charAt(0).toUpperCase() + inputValue.slice(1);
+
+    // Filtra filteredTitles basado en el valor del input
+    this.filteredTitles = of(
+      this.titles.filter((option) =>
+        option.name.toLowerCase().includes(inputValue)
+      )
+    );
+  }
+
+  processResponse(rawData: TitleEntity[]) {
+    rawData.forEach((title) => {
+      this.listTitles.push(title.name);
+    });
   }
 
   addTitle(newTitle: string): void {
@@ -147,9 +133,9 @@ export class FormCertificateComponent {
     this.certificateApplication.addTitle(newTitleObject).subscribe({
       next: (response: TitleEntity) => {
         this.utilSrv.handleSuccess('Added');
-        this.getAllTitles(); // Actualizar la lista de títulos
-        this.reactiveForm.get('titleId')?.setValue(response.name); // Setear el id del nuevo título
-        this.reactiveForm.get('titleId')?.updateValueAndValidity(); // Actualizar el valor y la validez
+        this.getAllTitles();
+        this.reactiveForm.get('titleId')?.setValue(response.name);
+        this.reactiveForm.get('titleId')?.updateValueAndValidity();
       },
       error: () => {
         this.utilSrv.handleError('adding');
@@ -158,19 +144,21 @@ export class FormCertificateComponent {
     this.showAddOption = false;
   }
 
-  onTitleInput(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.newTitle = input.value;
-  }
-
   save() {
     if (this.reactiveForm.invalid) return this.reactiveForm.markAllAsTouched(); // Activate all errors
 
     const record: CertificateEntity = this.reactiveForm.value;
-    console.log('record: ' + JSON.stringify(record));
 
-    record.titleId = record.titleId;
+    // Find the selected TitleEntity object based on the selected title name
+    const selectedTitle = this.titles.find(
+      (title) => title.name === record.titleId
+    );
+    if (selectedTitle) {
+      // Set the titleId to the selected title's ID
+      record.titleId = selectedTitle.id;
+    }
     record.userId = this.utilSrv.getUser().id;
+    console.log('record to send: ' + JSON.stringify(record));
     this.reference.close(record);
   }
 

@@ -61,9 +61,6 @@ export class ListCertificatesComponent {
     if (!rawData) return;
 
     const data: CertificateEntity[] = [];
-
-    console.log('rawData', rawData);
-
     let listCertificates = rawData;
 
     listCertificates.forEach((certificate: CertificateEntity) => {
@@ -100,8 +97,6 @@ export class ListCertificatesComponent {
 
     reference.afterClosed().subscribe((response) => {
       if (!response) return;
-
-      console.log('response received', response);
 
       const id: number = response.id;
       delete response.id;
