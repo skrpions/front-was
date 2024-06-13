@@ -38,7 +38,7 @@ export class ListCertificatesComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  private readonly certificateApplication = inject(CertificateApplication); // Adjusted injection
+  private readonly certificateApplication = inject(CertificateApplication);
   public dialog = inject(MatDialog);
   private utilSrv = inject(UtilsService);
 
@@ -74,19 +74,12 @@ export class ListCertificatesComponent {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
 
-    // Actualiza el filterPredicate para filtrar por title.name
     this.dataSource.filterPredicate = (data: any, filterString: string) => {
-      // Convierte el filterString a minúsculas para la comparación
       const lowerCaseFilterString = filterString.trim().toLowerCase();
-
-      // Accede a title.name y conviértelo a minúsculas para la comparación
       const titleName = data.title ? data.title.name.toLowerCase() : '';
-
-      // Realiza la comparación entre el valor de title.name y el filtro ingresado
       return titleName.includes(lowerCaseFilterString);
     };
 
-    // Aplica el filtro actualizado
     this.dataSource.filter = filterValue;
 
     // Reinicia la paginación si está presente
@@ -115,10 +108,10 @@ export class ListCertificatesComponent {
 
       if (id) {
         // Update entity
-        this.updateCertificate(id, response); // Adjusted method call
+        this.updateCertificate(id, response);
       } else {
         // New entity
-        this.addCertificate(response); // Adjusted method call
+        this.addCertificate(response);
       }
     });
   }

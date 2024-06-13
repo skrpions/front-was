@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { UtilsService } from '../../../../shared/services/utils.service';
 import { CertificateApplication } from '../../../certificates/application/certificate-application';
 import { CertificateEntity } from '../../../certificates/domain/entities/certificate-entity';
 import { CommonModule } from '@angular/common';
@@ -17,9 +16,8 @@ import { MaterialModule } from '../../../../shared/material.module';
   styleUrl: './list-collaborators.component.css',
 })
 export class ListCollaboratorsComponent {
-  icon_header = 'badge'; // Adjusted icon
-  title_header = 'Certificados'; // Adjusted title
-  //messages!: Messages;
+  icon_header = 'badge';
+  title_header = 'Certificados';
 
   filterValue = '';
   totalRecords = 0;
@@ -38,13 +36,11 @@ export class ListCollaboratorsComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  private readonly certificateApplication = inject(CertificateApplication); // Adjusted injection
+  private readonly certificateApplication = inject(CertificateApplication);
   public dialog = inject(MatDialog);
-  private utilSrv = inject(UtilsService);
 
   ngOnInit(): void {
     this.getAllCollaborators();
-    //this.isAdministrator = this.utilSrv.isAdministrator();
   }
 
   getAllCollaborators() {
@@ -79,7 +75,6 @@ export class ListCollaboratorsComponent {
       const title = typeof data.title === 'string' ? data.title : '';
       const expectedName = data.user ? data.user.name.toLowerCase() : '';
 
-      // Ahora, data.title siempre será una cadena, por lo que.toLowerCase() funcionará sin problemas
       return (
         title.toLowerCase().includes(filterString) ||
         expectedName.includes(filterString)
