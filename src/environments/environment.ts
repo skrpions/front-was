@@ -1,4 +1,4 @@
 export const environment = {
-  apiPath: 'http://localhost:3000/',
-  //apiPath: 'https://fakestoreapi.com',
+  apiPath: 'http://192.168.56.87:3001/',
+  //apiPath: 'http://localhost:3001/',
 };
