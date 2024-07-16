@@ -9,6 +9,6 @@ export class AuthInfrastructure {
   private http = inject(HttpClient);
 
   login(auth: AuthEntity): Observable<any> {
-    return this.http.post<any>(`${environment.apiPath}api/users/login`, auth);
+    return this.http.post<any>(`${environment.apiPath}users/login`, auth);
   }
 }

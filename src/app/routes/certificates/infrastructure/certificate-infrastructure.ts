@@ -11,45 +11,45 @@ export class CertificateInfrastructure {
 
   list(): Observable<CertificateEntity[]> {
     return this.http.get<CertificateEntity[]>(
-      `${environment.apiPath}api/certificates`
+      `${environment.apiPath}certificates`
       //`${environment.apiPath}/certificates`
     );
   }
 
   listCertificatesById(id: string): Observable<CertificateEntity> {
     return this.http.get<CertificateEntity>(
-      `${environment.apiPath}api/certificates/user/${id}`
+      `${environment.apiPath}certificates/user/${id}`
     );
   }
 
   add(entity: Partial<CertificateEntity>): Observable<CertificateEntity> {
     return this.http.post<CertificateEntity>(
-      `${environment.apiPath}api/certificates`,
+      `${environment.apiPath}certificates`,
       entity
     );
   }
 
   update(id: string, entity: CertificateEntity): Observable<CertificateEntity> {
     return this.http.put<CertificateEntity>(
-      `${environment.apiPath}api/certificates/${id}`,
+      `${environment.apiPath}certificates/${id}`,
       entity
     );
   }
 
   delete(id: string): Observable<any> {
     return this.http.delete<any>(
-      `${environment.apiPath}api/certificates/${id}`
+      `${environment.apiPath}certificates/${id}`
     );
   }
 
   // --------------- Titles ---------------------
   listTitles(): Observable<TitleEntity[]> {
-    return this.http.get<TitleEntity[]>(`${environment.apiPath}api/titles`);
+    return this.http.get<TitleEntity[]>(`${environment.apiPath}titles`);
   }
 
   addTitle(entity: Partial<TitleEntity>): Observable<TitleEntity> {
     return this.http.post<TitleEntity>(
-      `${environment.apiPath}api/titles`,
+      `${environment.apiPath}titles`,
       entity
     );
   }
