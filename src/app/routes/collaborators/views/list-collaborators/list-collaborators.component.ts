@@ -31,6 +31,7 @@ export class ListCollaboratorsComponent {
     'institution',
     'certificationDate',
     'certificateType',
+    'professionalCardIssueDate',
   ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -106,6 +107,9 @@ export class ListCollaboratorsComponent {
         new Date(row.certificationDate)
       ),
       'Certificate Type': row.certificateType,
+      'Professional Card Issue Date': this.formatDateString(
+        new Date(row.professionalCardIssueDate)
+      ),
     }));
 
     this.exportSrv.exportAsExcelFile(dataToExport, 'exported_data');

@@ -5,6 +5,7 @@ export interface Certificate {
   certificationDate: string;
   certificateType: string;
   userId: number;
+  professionalCardIssueDate: string;
 }
 
 export type CertificateEntity = Required<Certificate>;

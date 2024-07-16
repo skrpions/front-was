@@ -53,6 +53,14 @@
           <td mat-cell *matCellDef="let row">{{ row.certificateType }}</td>
         </ng-container>
 
+        <!-- professional Card Issue Date Column -->
+        <ng-container matColumnDef="professionalCardIssueDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Professional Card Issue Date
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.professionalCardIssueDate | date}}</td>
+        </ng-container>
+
         <!-- Actions Column -->
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef></th>

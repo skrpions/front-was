@@ -81,6 +81,19 @@
         </mat-form-field>
       </div>
 
+      <div class="row">
+        <!-- Professional Card Issue Date -->
+        <mat-form-field class="col-6" appearance="outline">
+          <mat-label>Professional Card Issue Date:</mat-label>
+          <input formControlName="professionalCardIssueDate" [min]="minDate" [max]="maxDate" matInput [matDatepicker]="picker2">
+          <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+          @if (professionalCardIssueDateField?.hasError('required')){
+          <mat-error>Professional Card Issue Date is required</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
     </div>
 
     <div class="row">

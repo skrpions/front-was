@@ -16,6 +16,7 @@ export class CertificateFactory {
       certificationDate: data.certificationDate ?? '',
       certificateType: data.certificateType ?? '',
       userId: data.userId ?? 0,
+      professionalCardIssueDate: data.professionalCardIssueDate ?? '',
     };
 
     return certificateEntity;

@@ -68,6 +68,7 @@ export class FormCertificateComponent {
       ],
       certificateType: [this.data?.certificateType, [Validators.required]],
       certificationDate: [this.data?.certificationDate, [Validators.required]],
+      professionalCardIssueDate: [this.data?.professionalCardIssueDate],
     });
   }
 
@@ -180,5 +181,9 @@ export class FormCertificateComponent {
 
   get certificateTypeField() {
     return this.reactiveForm.get('certificateType');
+  }
+
+  get professionalCardIssueDateField() {
+    return this.reactiveForm.get('professionalCardIssueDate');
   }
 }

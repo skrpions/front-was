@@ -33,6 +33,7 @@ export class ListCertificatesComponent {
     'institution',
     'certificationDate',
     'certificateType',
+    'professionalCardIssueDate',
     'actions',
   ];
 
