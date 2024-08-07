@@ -1,0 +1,119 @@
+<mat-toolbar align="center" class="space-between black-toolbar">
+  <span class="centered">
+    <mat-icon>{{ icon_header }}</mat-icon>
+    {{ title_header }}
+  </span>
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-dialog-content>
+  <form [formGroup]="reactiveForm">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <!-- Username -->
+          <mat-form-field class="col-12" appearance="outline">
+            <mat-label>Identification Number:</mat-label>
+            <input formControlName="username" type="text" matInput required />
+            @if (usernameField?.hasError('required')){
+            <mat-error>Identification Number is required</mat-error>
+            } @if (usernameField?.hasError('minlength')){
+            <mat-error>Insufficient Characters</mat-error>
+            } @if (usernameField?.hasError('maxlength')){
+            <mat-error>Character Limit Reached</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <!-- Name -->
+          <mat-form-field class="col-6" appearance="outline">
+            <mat-label>Name:</mat-label>
+            <input
+              formControlName="name"
+              type="text"
+              matInput
+              required
+            />
+            @if (nameField?.hasError('required')){
+            <mat-error>Name is required</mat-error>
+            } @if (nameField?.hasError('minlength')){
+            <mat-error>Insufficient Characters</mat-error>
+            } @if (nameField?.hasError('maxlength')){
+            <mat-error>Character Limit Reached</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Lastname -->
+          <mat-form-field class="col-6" appearance="outline">
+            <mat-label>Lastname:</mat-label>
+            <input
+              formControlName="lastname"
+              type="text"
+              matInput
+              required
+            />
+            @if (lastnameField?.hasError('required')){
+            <mat-error>Lastname is required</mat-error>
+            } @if (lastnameField?.hasError('minlength')){
+            <mat-error>Insufficient Characters</mat-error>
+            } @if (lastnameField?.hasError('maxlength')){
+            <mat-error>Character Limit Reached</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <!-- Boss -->
+          <mat-form-field class="col-12" appearance="outline">
+            <mat-label>Boss:</mat-label>
+            <input
+              formControlName="boss"
+              type="text"
+              matInput
+              required
+            />
+            @if (bossField?.hasError('required')){
+            <mat-error>Boss is required</mat-error>
+            } @if (bossField?.hasError('minlength')){
+            <mat-error>Insufficient Characters</mat-error>
+            } @if (bossField?.hasError('maxlength')){
+            <mat-error>Character Limit Reached</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <mat-dialog-actions>
+        <!-- Save -->
+        <button
+          type="button"
+          mat-raised-button
+          mat-dialog-close
+          color="primary"
+          [disabled]="reactiveForm.invalid"
+          cdkFocusInitial
+          (click)="save()"
+        >
+          <mat-icon>save</mat-icon>
+          Save
+        </button>
+
+        <!-- Close -->
+        <button
+          class="black-close"
+          type="button"
+          mat-raised-button
+          mat-dialog-close
+        >
+          <mat-icon>close</mat-icon>
+          Close
+        </button>
+      </mat-dialog-actions>
+    </div>
+  </form>
+</mat-dialog-content>

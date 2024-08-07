@@ -23,7 +23,7 @@ export class SidenavComponent {
   private readonly storageApplication = inject(StorageApplication);
 
   user!: TokenResponse;
-  userHasAccess = this.user?.username === '52148809';
+  userHasAccess = this.user?.username === '52148809' || this.user?.username === '1061779667';
 
   mobileQuery!: MediaQueryList; // Responsive media query
   menuNav = [
@@ -47,7 +47,7 @@ export class SidenavComponent {
   }
 
   get currentMenu(): { name: string; route: string; icon: string }[] {
-    return this.user?.username === '52148809'
+    return this.user?.username === '52148809' || this.user?.username === '1061779667'
       ? this.menuNavAdmin
       : this.menuNav;
   }

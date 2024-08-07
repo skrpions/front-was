@@ -7,6 +7,7 @@ import { StorageInfrastructure } from '../infrastructure/storage-infrastructure'
 import { StorageRepository } from '../domain/repositories/storage-repository';
 import { UtilsService } from '../../../shared/services/utils.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { UserEntity } from '../domain/entities/user-entity';
 
 @Injectable()
 export class AuthApplication {
@@ -20,6 +21,10 @@ export class AuthApplication {
     @Inject(StorageInfrastructure)
     private readonly storageRepository: StorageRepository
   ) {}
+
+  register (userEntity: UserEntity) {
+    return this.authRepository.register(userEntity);
+  }
 
   login(auth: any) {
     this.authRepository.login(auth).subscribe({
