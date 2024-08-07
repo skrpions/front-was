@@ -37,10 +37,10 @@
       <div class="row">
         <!-- Institution -->
         <mat-form-field class="col-12" appearance="outline">
-          <mat-label>Institution:</mat-label>
+          <mat-label>Institution or Platform:</mat-label>
           <input formControlName="institution" type="text" appOnlyLetters matInput required />
           @if (institutionField?.hasError('required')){
-          <mat-error>institution is required</mat-error>
+          <mat-error>Institution is required</mat-error>
           } @if (institutionField?.hasError('minlength')){
           <mat-error>Insufficient Characters</mat-error>
           } @if (institutionField?.hasError('maxlength')){
@@ -61,7 +61,7 @@
             } @empty { Empty list of categories }
           </mat-select>
           @if (certificateTypeField?.hasError('required')){
-          <mat-error>certificateType is required</mat-error>
+          <mat-error>Certificate Type is required</mat-error>
           } @if (certificateTypeField?.hasError('minlength')){
           <mat-error>Insufficient Characters</mat-error>
           } @if (certificateTypeField?.hasError('maxlength')){
@@ -76,21 +76,18 @@
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
           @if (certificationDateField?.hasError('required')){
-          <mat-error>CertificationDate is required</mat-error>
+          <mat-error>Certification Date is required</mat-error>
           }
         </mat-form-field>
       </div>
 
       <div class="row">
         <!-- Professional Card Issue Date -->
-        <mat-form-field class="col-6" appearance="outline">
-          <mat-label>Professional Card Issue Date:</mat-label>
+        <mat-form-field class="col-12" appearance="outline">
+          <mat-label>Professional Card Issue Date: (If Applicable)</mat-label>
           <input formControlName="professionalCardIssueDate" [min]="minDate" [max]="maxDate" matInput [matDatepicker]="picker2">
           <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
-          @if (professionalCardIssueDateField?.hasError('required')){
-          <mat-error>Professional Card Issue Date is required</mat-error>
-          }
         </mat-form-field>
       </div>
 
