@@ -50,8 +50,6 @@ export class ListCollaboratorsComponent {
     this.getAllCollaborators();
   }
 
-
-
   getAllCollaborators() {
     this.certificateApplication.list().subscribe({
       next: (rawData: any) => {
@@ -85,8 +83,11 @@ export class ListCollaboratorsComponent {
     this.totalRecords = data.length;
   }
 
-  openForm(enterAnimationDuration: string, exitAnimationDuration: string, row: any = null!) {
-
+  openForm(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string,
+    row: any = null!
+  ) {
     const reference = this.dialog.open(RegisterComponent, {
       data: row,
       width: '750px',
@@ -94,10 +95,7 @@ export class ListCollaboratorsComponent {
       exitAnimationDuration,
     });
 
-    reference.afterClosed().subscribe(response => {
-
-      console.log('✅',response);
-
+    reference.afterClosed().subscribe((response) => {
       if (!response) return;
 
       const id: number = response.id;
@@ -107,15 +105,13 @@ export class ListCollaboratorsComponent {
         // Update entity
         //this.updateProduct(id, response);
       } else {
-         // New entity
+        // New entity
         this.addCollaborator(response);
       }
     });
-
   }
 
   private addCollaborator(response: any) {
-
     this.authApplication.register(response).subscribe({
       next: (response) => {
         console.log('response', response);
@@ -125,7 +121,7 @@ export class ListCollaboratorsComponent {
       },
       error: () => {
         this.utilSrv.handleError('adding');
-      }
+      },
     });
   }
 

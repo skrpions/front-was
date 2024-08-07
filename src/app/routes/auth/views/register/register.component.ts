@@ -4,11 +4,12 @@ import { MaterialModule } from '../../../../shared/material.module';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UserEntity } from '../../domain/entities/user-entity';
+import { SharedModule } from '../../../../shared/shared.module';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, MaterialModule, ReactiveFormsModule, FormsModule,],
+  imports: [CommonModule, MaterialModule, ReactiveFormsModule, FormsModule, SharedModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -51,9 +52,21 @@ export class RegisterComponent {
     if (this.reactiveForm.invalid) return this.reactiveForm.markAllAsTouched(); // Activate all errors
 
     const record: UserEntity = this.reactiveForm.value;
-    record.password = this.reactiveForm.get('username')?.value;
 
+    // Convertir name y lastname a camelCase
+    record.name = this.toProperCase(record.name);
+    record.lastname = this.toProperCase(record.lastname);
+    record.boss = this.toProperCase(record.boss);
+
+    record.password = this.reactiveForm.get('username')?.value;
     this.reference.close(record);
+  }
+
+  // Método auxiliar para convertir a camelCase
+  private toProperCase(str: string): string {
+    return str.split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
   }
 
   get usernameField() {

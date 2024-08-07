@@ -16,7 +16,13 @@
           <!-- Username -->
           <mat-form-field class="col-12" appearance="outline">
             <mat-label>Identification Number:</mat-label>
-            <input formControlName="username" type="text" matInput required />
+            <input
+              formControlName="username"
+              type="text"
+              appOnlyNumbers
+              matInput
+              required
+            />
             @if (usernameField?.hasError('required')){
             <mat-error>Identification Number is required</mat-error>
             } @if (usernameField?.hasError('minlength')){
@@ -34,6 +40,7 @@
             <input
               formControlName="name"
               type="text"
+              appOnlyLetters
               matInput
               required
             />
@@ -52,6 +59,7 @@
             <input
               formControlName="lastname"
               type="text"
+              appOnlyLetters
               matInput
               required
             />
@@ -72,6 +80,7 @@
             <input
               formControlName="boss"
               type="text"
+              appOnlyLetters
               matInput
               required
             />

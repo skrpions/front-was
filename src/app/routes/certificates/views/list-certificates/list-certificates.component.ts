@@ -122,7 +122,6 @@ export class ListCertificatesComponent {
   private updateCertificate(id: any, response: any) {
     this.certificateApplication.update(id, response).subscribe({
       next: (reponse) => {
-        console.log('✅ ', response);
         this.utilSrv.handleSuccess('Updated');
         this.getAll();
       },
